@@ -1,0 +1,50 @@
+name: screener
+
+on:
+  schedule:
+    # Every 15 minutes, 2 minutes after each 15-min bar closes, across the US session in both
+    # daylight and standard time. The script exits without changes when no new bar has finished
+    # (before the open, after the close, weekends, holidays). Alerts still fire only on 4h bars.
+    - cron: "2,17,32,47 13-21 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild even if no new bar finished"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: screener
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run screener
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          ALPACA_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          HOLDINGS_JSON: ${{ secrets.HOLDINGS_JSON }}
+          DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+          NOTIFY_SUMMARY: ${{ vars.NOTIFY_SUMMARY }}
+          SCREENER_PROVIDER: ${{ vars.SCREENER_PROVIDER }}
+          FORCE: ${{ inputs.force }}
+        run: python screener/screener.py
+      - name: Commit updated dashboard
+        run: |
+          git config user.name "screener-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then echo "No changes"; else git commit -m "Screener update $(date -u +%Y-%m-%dT%H:%MZ)" && git push; fi
