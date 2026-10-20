@@ -1,11 +1,11 @@
 {
- "last_bar": "2026-10-20T09:30:00-04:00",
- "last_bar_15": "2026-10-20T15:15:00-04:00",
+ "last_bar": "2026-10-20T13:30:00-04:00",
+ "last_bar_15": "2026-10-20T15:45:00-04:00",
  "decisions": {
   "DELL": "WATCH",
   "SNOW": "WATCH",
   "CRWD": "WATCH",
-  "MU": "WATCH",
+  "MU": "NO TRADE",
   "DDOG": "WATCH",
   "PANW": "WATCH",
   "AMD": "WATCH",
@@ -16,9 +16,9 @@
   "ABBV": "WAIT",
   "NET": "WATCH",
   "INTC": "NO TRADE",
-  "MRK": "BUY",
+  "MRK": "WAIT",
   "PLTR": "WATCH",
-  "PM": "WAIT",
+  "PM": "SKIP",
   "MET": "WAIT",
   "SHOP": "WAIT",
   "V": "WAIT"
