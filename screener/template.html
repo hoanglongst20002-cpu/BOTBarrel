@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Momentum Leaders Screener</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#15202b; --muted:#5a6878; --line:#d6dde6; --soft:#e9eef3;
+  --buy:#23845a; --watch:#1d6a86; --wait:#b26a05; --no:#6b7684; --avoid:#c03a46; --skip:#7a4fb8;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0e1319; --surface:#151c24; --ink:#e3e8ee; --muted:#93a0ae; --line:#29333e; --soft:#1c242d;
+  --buy:#4cc38a; --watch:#55b6d4; --wait:#f0a532; --no:#9aa6b4; --avoid:#f06c76; --skip:#b79cf0; color-scheme:dark}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px;display:flex;flex-direction:column;gap:32px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4.2vw,38px);font-weight:800;line-height:1.1}
+h2{font-size:20px;font-weight:700}
+p{margin:0;max-width:72ch}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.note{font-size:13px;color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+section{display:flex;flex-direction:column;gap:14px}
+header{display:flex;flex-direction:column;gap:10px}
+.lede{color:var(--muted);font-size:16px}
+.stale{background:color-mix(in srgb,var(--wait) 14%,var(--surface));border:1px solid var(--wait);border-radius:6px;padding:10px 14px;font-size:14px}
+.counts{display:flex;flex-wrap:wrap;gap:10px}
+.count{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 14px;display:flex;flex-direction:column;gap:2px;min-width:110px}
+.count .v{font-family:var(--mono);font-size:22px}
+.near{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card .t{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card .tk{font-family:var(--display);font-weight:800;font-size:20px}
+.card .d{font-family:var(--mono);font-size:13px}
+.controls{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-end}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted)}
+input[type=number]{font:500 14px var(--mono);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:7px 9px;width:130px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 13px var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--watch);outline-offset:2px}
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:1060px;font-size:13.5px}
+th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums}
+th{font-size:11.5px;color:var(--muted);font-weight:600;background:var(--surface)}
+td{font-family:var(--mono)}
+td.l,th.l{text-align:left}
+td.why{font-family:var(--body);white-space:normal;min-width:260px;text-align:left;color:var(--muted);font-size:13px}
+tr:last-child td{border-bottom:0}
+.tk-cell{font-family:var(--display);font-weight:700;font-size:14px}
+.pill{display:inline-block;font-family:var(--body);font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;letter-spacing:.02em}
+.p-BUY{color:var(--buy);background:color-mix(in srgb,var(--buy) 15%,transparent)}
+.p-WATCH{color:var(--watch);background:color-mix(in srgb,var(--watch) 15%,transparent)}
+.p-WAIT{color:var(--wait);background:color-mix(in srgb,var(--wait) 16%,transparent)}
+.p-NO{color:var(--no);background:var(--soft)}
+.p-AVOID{color:var(--avoid);background:color-mix(in srgb,var(--avoid) 14%,transparent)}
+.p-SKIP{color:var(--skip);background:color-mix(in srgb,var(--skip) 15%,transparent)}
+.pos{color:var(--buy)} .neg{color:var(--avoid)}
+.flag{color:var(--skip);font-weight:600}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.legend div{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow" id="stamp">Loading…</div>
+  <h1>Momentum Leaders Screener</h1>
+  <p class="lede">The strongest large US stocks by 6-month gain, and what the 4h playbook says about each one. Long only.</p>
+  <p class="note" id="sub"></p>
+  <div class="stale" id="stale" hidden></div>
+</header>
+
+<section><div class="counts" id="counts"></div></section>
+
+<section>
+  <div><div class="eyebrow">Closest to a buy signal</div><h2>Uptrend dips nearest their trigger</h2></div>
+  <p class="note">A buy needs a 4h <strong>close</strong> back above SMA20 while the uptrend holds. "Live" is the latest price when the screener ran; the trigger moves a little with each bar.</p>
+  <div class="near" id="near"></div>
+</section>
+
+<section>
+  <div class="controls">
+    <label class="f">Account (USD)<input type="number" id="acct" value="10000" step="500" min="500"></label>
+    <label class="f">Max positions<input type="number" id="npos" value="2" step="1" min="1" max="6"></label>
+    <div class="filters" role="group" aria-label="Filter by decision" id="filters"></div>
+  </div>
+  <div class="tbl-wrap"><table>
+    <thead><tr>
+      <th>Rank</th><th class="l">Ticker</th><th class="l">Decision</th><th>6-mo</th><th>1-mo</th>
+      <th>4h close</th><th>Live</th><th>Trigger (SMA20)</th><th>Live vs trigger</th><th>SMA250</th>
+      <th>Trailing stop</th><th>Safety stop</th><th>Shares</th><th class="l">Earnings</th><th class="l">Why</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <p class="note">Stops and shares assume entry at the trigger (or at the last close for a BUY). Shares split the account equally across your max positions. Earnings dates come from the data provider and can be estimates; highlighted when 7 or fewer trading days away. Your account size stays in this browser only.</p>
+</section>
+
+<section>
+  <div><div class="eyebrow">What each decision means</div><h2>Reading the table</h2></div>
+  <div class="legend">
+    <div><span class="pill p-BUY">BUY</span><span>Uptrend, and the dip just ended with a 4h close back above SMA20. Buy at the next bar's open.</span></div>
+    <div><span class="pill p-WATCH">WATCH</span><span>Uptrend, price at or below SMA20. Wait for a 4h close above the trigger.</span></div>
+    <div><span class="pill p-WAIT">WAIT</span><span>Uptrend, but price is above SMA20 with no dip yet. Buying now means chasing.</span></div>
+    <div><span class="pill p-NO">NO TRADE</span><span>Price below SMA250 while SMA250 still rises. Mixed trend.</span></div>
+    <div><span class="pill p-AVOID">AVOID</span><span>Downtrend: below a falling SMA250.</span></div>
+    <div><span class="pill p-SKIP">SKIP</span><span>A setup, but earnings fall within the next 2 sessions.</span></div>
+  </div>
+  <p class="note">Mechanical rules from a learning project, not financial advice.</p>
+</section>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+(function(){
+  const $=id=>document.getElementById(id);
+  if(!DATA||!DATA.rows){$("stamp").textContent="No data yet. Run the workflow once.";return;}
+  const ORDER={BUY:0,WATCH:1,SKIP:2,WAIT:3,"NO TRADE":4,AVOID:5,"NO DATA":6};
+  const cls=d=>d==="NO TRADE"?"NO":d==="NO DATA"?"NO":d;
+  const f2=v=>v==null||!isFinite(v)?"–":Number(v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  const pct=(v,d=1)=>`${v>0?"+":""}${Number(v).toFixed(d)}%`;
+  const ny=s=>new Date(s).toLocaleString("en-US",{timeZone:"America/New_York",weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+  const van=s=>new Date(s).toLocaleString("en-US",{timeZone:"America/Vancouver",hour:"numeric",minute:"2-digit"});
+  const today=new Date().toLocaleDateString("en-CA",{timeZone:"America/New_York"});
+  const bdays=(a,b)=>{let d=new Date(a+"T12:00:00Z"),e=new Date(b+"T12:00:00Z"),n=0;if(e<d)return -1;while(d<e){d.setUTCDate(d.getUTCDate()+1);if(d.getUTCDay()%6)n++;}return n;};
+  const lastBar=DATA.last_bar;
+  $("stamp").textContent=`Last finished 4h bar: ${ny(lastBar)} ET · updated ${ny(DATA.generated)} ET (${van(DATA.generated)} Vancouver)`;
+  $("sub").textContent=`Top ${DATA.rows.length} of ${DATA.universe_size} liquid names (price ≥ $${DATA.rules.min_price}, ≥ $${DATA.rules.min_dollar_vol/1e6}M traded per day). Data: ${DATA.provider}.`;
+  const hrs=(Date.now()-new Date(DATA.generated).getTime())/3600e3;
+  if(hrs>30){$("stale").hidden=false;$("stale").textContent=`This data is ${Math.round(hrs)} hours old. Check the workflow on GitHub if a trading day has passed.`;}
+
+  let filter="all";
+  try{const s=JSON.parse(localStorage.getItem("screener.prefs")||"{}");if(s.acct)$("acct").value=s.acct;if(s.npos)$("npos").value=s.npos;}catch(e){}
+  function render(){
+    const acct=Math.max(0,parseFloat($("acct").value)||0), np=Math.max(1,parseInt($("npos").value)||1);
+    try{localStorage.setItem("screener.prefs",JSON.stringify({acct,npos:np}));}catch(e){}
+    const R=DATA.rows.slice().sort((a,b)=>ORDER[a.decision]-ORDER[b.decision]||a.rank-b.rank);
+    $("rows").innerHTML=R.filter(r=>filter==="all"||r.decision===filter).map(r=>{
+      const act=r.decision==="BUY"||r.decision==="WATCH", ref=r.decision==="BUY"?r.close:r.sma20;
+      const gap=r.sma20?100*(r.live/r.sma20-1):NaN, sh=act&&ref?(acct/np)/ref:null;
+      const bd=r.earnings?bdays(today,r.earnings):-1, soon=bd>=0&&bd<=7;
+      return `<tr><td>${r.rank}</td><td class="l tk-cell">${r.ticker}</td><td class="l"><span class="pill p-${cls(r.decision)}">${r.decision}</span></td>
+        <td class="${r.ret_6m>=0?"pos":"neg"}">${pct(r.ret_6m,0)}</td><td class="${r.ret_1m>=0?"pos":"neg"}">${pct(r.ret_1m,0)}</td>
+        <td>${f2(r.close)}</td><td>${f2(r.live)}</td><td>${f2(r.sma20)}</td><td class="${gap>=0?"pos":"neg"}">${isFinite(gap)?pct(gap):"–"}</td>
+        <td>${f2(r.sma250)} ${r.sma250_rising?"↑":"↓"}</td>
+        <td>${act?f2(ref-4*r.atr):"–"}</td><td>${act?f2(ref-6*r.atr):"–"}</td><td>${sh?sh.toFixed(sh<10?2:1):"–"}</td>
+        <td class="l ${soon?"flag":""}">${r.earnings||"–"}${soon?` · ${bd}d`:""}</td><td class="why">${r.why||""}</td></tr>`;}).join("");
+    const near=DATA.rows.filter(r=>r.decision==="BUY"||r.decision==="WATCH").map(r=>({r,gap:100*(r.live/r.sma20-1)})).sort((a,b)=>(b.r.decision==="BUY")-(a.r.decision==="BUY")||b.gap-a.gap).slice(0,4);
+    $("near").innerHTML=near.length?near.map(({r,gap})=>`<div class="card"><div class="t"><span class="tk">${r.ticker}</span><span class="pill p-${cls(r.decision)}">#${r.rank} · ${pct(r.ret_6m,0)} 6-mo</span></div>
+        <div class="d">Live ${f2(r.live)} vs trigger ${f2(r.sma20)} <span class="${gap>=0?"pos":"neg"}">(${pct(gap)})</span></div>
+        <div class="d">Trail stop ${f2((r.decision==="BUY"?r.close:r.sma20)-4*r.atr)}, safety ${f2((r.decision==="BUY"?r.close:r.sma20)-6*r.atr)}</div>
+        <div class="note">${r.decision==="BUY"?"Signal on the last bar. Buy at the next bar's open.":gap>=0?"Above the trigger now. A 4h close above it would be a BUY.":"Needs to rise "+Math.abs(gap).toFixed(1)+"% and close a 4h bar there."}${r.earnings?` Earnings ${r.earnings}.`:""}</div></div>`).join("")
+      :`<p class="note">No names in an uptrend dip right now.</p>`;
+    const cnt={};DATA.rows.forEach(r=>cnt[r.decision]=(cnt[r.decision]||0)+1);
+    $("counts").innerHTML=["BUY","WATCH","WAIT","NO TRADE","AVOID","SKIP"].map(k=>`<div class="count"><span class="v">${cnt[k]||0}</span><span><span class="pill p-${cls(k)}">${k}</span></span></div>`).join("");
+  }
+  const F=["all","BUY","WATCH","WAIT","NO TRADE"];
+  $("filters").innerHTML=F.map((f,i)=>`<button type="button" class="chip" id="f${i}" data-f="${f}" aria-pressed="${f==="all"}">${f==="all"?"All":f}</button>`).join("");
+  $("filters").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;filter=b.dataset.f;
+    $("filters").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));render();});
+  ["acct","npos"].forEach(id=>$(id).addEventListener("input",render));
+  render();
+})();
+</script>
+</body>
+</html>
