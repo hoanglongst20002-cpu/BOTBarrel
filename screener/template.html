@@ -50,7 +50,7 @@ input[type=number]{font:500 14px var(--mono);color:var(--ink);background:var(--s
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
 button:focus-visible,input:focus-visible{outline:2px solid var(--watch);outline-offset:2px}
 .tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
-table{border-collapse:collapse;width:100%;min-width:1060px;font-size:13.5px}
+table{border-collapse:collapse;width:100%;min-width:1280px;font-size:13.5px}
 th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums}
 th{font-size:11.5px;color:var(--muted);font-weight:600;background:var(--surface)}
 td{font-family:var(--mono)}
@@ -67,6 +67,13 @@ tr:last-child td{border-bottom:0}
 .p-SKIP{color:var(--skip);background:color-mix(in srgb,var(--skip) 15%,transparent)}
 .pos{color:var(--buy)} .neg{color:var(--avoid)}
 .flag{color:var(--skip);font-weight:600}
+.pill.ctx{font-size:10.5px;padding:1px 7px;opacity:.85}
+.hist-controls{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-end}
+select{font:500 14px var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:7px 9px}
+table.hist{min-width:640px}
+table.hist td.chg{box-shadow:inset 0 0 0 2px var(--wait)}
+.flips{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px}
+.flips b{font-family:var(--mono)}
 .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
 .legend div{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
 </style>
@@ -99,11 +106,29 @@ tr:last-child td{border-bottom:0}
     <thead><tr>
       <th>Rank</th><th class="l">Ticker</th><th class="l">Decision</th><th>6-mo</th><th>1-mo</th>
       <th>4h close</th><th>Live</th><th>Trigger (SMA20)</th><th>Live vs trigger</th><th>SMA250</th>
-      <th>Trailing stop</th><th>Safety stop</th><th>Shares</th><th class="l">Earnings</th><th class="l">Why</th>
+      <th>Trailing stop</th><th>Safety stop</th><th>Shares</th><th class="l">1h · 15m (context)</th><th class="l">15m vs VWAP</th><th class="l">Earnings</th><th class="l">Why</th>
     </tr></thead>
     <tbody id="rows"></tbody>
   </table></div>
+  <p class="note"><strong>1h · 15m</strong> show the same rules on faster bars, as context only; alerts and the tested strategy use 4h. <strong>15m vs VWAP</strong> is whether the last finished 15-minute close is above the session's VWAP. In a backtest of 417 4h BUY signals (Jul 2024 – Oct 2026), waiting for that confirmation changed results by +0.12 percentage points per trade, which isn't statistically meaningful. Use it as context, not as a rule.</p>
   <p class="note">Stops and shares assume entry at the trigger (or at the last close for a BUY). Shares split the account equally across your max positions. Earnings dates come from the data provider and can be estimates; highlighted when 7 or fewer trading days away. Your account size stays in this browser only.</p>
+</section>
+
+<section>
+  <div><div class="eyebrow">Action history</div><h2>How the states changed during the day</h2></div>
+  <p class="note">One row per screener run (every 15 minutes). Outlined cells changed since the previous run. Only the 4h column is the tested strategy; 1h and 15m are context and are expected to flip often.</p>
+  <div class="hist-controls">
+    <label class="f">Day<select id="hDay"></select></label>
+    <label class="f">Stock<select id="hTk"></select></label>
+    <label class="f">From (ET)<select id="hFrom"></select></label>
+    <label class="f">To (ET)<select id="hTo"></select></label>
+  </div>
+  <div class="flips" id="hFlips"></div>
+  <div class="tbl-wrap"><table class="hist">
+    <thead><tr><th class="l">Run (ET)</th><th class="l">Vancouver</th><th class="l">4h (strategy)</th><th class="l">1h</th><th class="l">15m</th><th>Price</th><th>VWAP</th><th class="l">15m vs VWAP</th></tr></thead>
+    <tbody id="hRows"></tbody>
+  </table></div>
+  <p class="note" id="hNote"></p>
 </section>
 
 <section>
@@ -127,6 +152,9 @@ const DATA = /*__DATA__*/null;
   if(!DATA||!DATA.rows){$("stamp").textContent="No data yet. Run the workflow once.";return;}
   const ORDER={BUY:0,WATCH:1,SKIP:2,WAIT:3,"NO TRADE":4,AVOID:5,"NO DATA":6};
   const cls=d=>d==="NO TRADE"?"NO":d==="NO DATA"?"NO":d;
+  const SHORT={BUY:"BUY",WATCH:"WATCH",WAIT:"WAIT","NO TRADE":"NO TR",AVOID:"AVOID",SKIP:"SKIP","NO DATA":"–"};
+  const ctx=d=>d?`<span class="pill ctx p-${cls(d)}" title="${d}">${SHORT[d]||d}</span>`:"–";
+  const vw=v=>!v?"–":`<span class="${v.above?"pos":"neg"}">${v.above?"above":"below"}</span> <span class="note">${f2(v.vwap)}</span>`;
   const f2=v=>v==null||!isFinite(v)?"–":Number(v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
   const pct=(v,d=1)=>`${v>0?"+":""}${Number(v).toFixed(d)}%`;
   const ny=s=>new Date(s).toLocaleString("en-US",{timeZone:"America/New_York",weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
@@ -154,6 +182,7 @@ const DATA = /*__DATA__*/null;
         <td>${f2(r.close)}</td><td>${f2(r.live)}</td><td>${f2(r.sma20)}</td><td class="${gap>=0?"pos":"neg"}">${isFinite(gap)?pct(gap):"–"}</td>
         <td>${f2(r.sma250)} ${r.sma250_rising?"↑":"↓"}</td>
         <td>${act?f2(ref-4*r.atr):"–"}</td><td>${act?f2(ref-6*r.atr):"–"}</td><td>${sh?sh.toFixed(sh<10?2:1):"–"}</td>
+        <td class="l">${ctx(r.ctx_1h)} ${ctx(r.ctx_15m)}</td><td class="l">${vw(r.vwap)}</td>
         <td class="l ${soon?"flag":""}">${r.earnings||"–"}${soon?` · ${bd}d`:""}</td><td class="why">${r.why||""}</td></tr>`;}).join("");
     const near=DATA.rows.filter(r=>r.decision==="BUY"||r.decision==="WATCH").map(r=>({r,gap:100*(r.live/r.sma20-1)})).sort((a,b)=>(b.r.decision==="BUY")-(a.r.decision==="BUY")||b.gap-a.gap).slice(0,4);
     $("near").innerHTML=near.length?near.map(({r,gap})=>`<div class="card"><div class="t"><span class="tk">${r.ticker}</span><span class="pill p-${cls(r.decision)}">#${r.rank} · ${pct(r.ret_6m,0)} 6-mo</span></div>
@@ -170,6 +199,40 @@ const DATA = /*__DATA__*/null;
     $("filters").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));render();});
   ["acct","npos"].forEach(id=>$(id).addEventListener("input",render));
   render();
+
+  // ---------- action history viewer
+  const H={cache:{}};
+  const hm=s=>new Date(s).toLocaleTimeString("en-US",{timeZone:"America/New_York",hour:"numeric",minute:"2-digit"});
+  const hv=s=>new Date(s).toLocaleTimeString("en-US",{timeZone:"America/Vancouver",hour:"numeric",minute:"2-digit"});
+  const days=(DATA.history_days||[]).slice().reverse();
+  $("hDay").innerHTML=days.map(d=>`<option value="${d}">${d}</option>`).join("")||`<option value="">No history yet</option>`;
+  $("hTk").innerHTML=DATA.rows.map(r=>`<option value="${r.ticker}">${r.ticker} · ${r.decision}</option>`).join("");
+  async function loadDay(d){ if(!d) return null; if(H.cache[d]) return H.cache[d];
+    try{const res=await fetch(`data/history/${d}.json`,{cache:"no-store"}); if(!res.ok) throw 0; return H.cache[d]=await res.json();}
+    catch(e){return null;} }
+  async function drawHist(keepRange){
+    const d=$("hDay").value, tk=$("hTk").value, h=await loadDay(d);
+    if(!h){$("hRows").innerHTML="";$("hFlips").innerHTML="";$("hNote").textContent=d?"Couldn't load this day's history. It loads when the page is served from GitHub Pages, not opened as a local file.":"History appears after the first scheduled runs.";return;}
+    const runs=h.runs.filter(r=>r.s[tk]);
+    const times=runs.map(r=>r.t);
+    if(!keepRange){ $("hFrom").innerHTML=times.map((t,i)=>`<option value="${i}">${hm(t)}</option>`).join("");
+      $("hTo").innerHTML=times.map((t,i)=>`<option value="${i}" ${i===times.length-1?"selected":""}>${hm(t)}</option>`).join(""); }
+    const a=+$("hFrom").value||0, b=Math.max(a,+$("hTo").value||times.length-1);
+    const sel=runs.slice(a,b+1);
+    let prev=null; const fl=[0,0,0];
+    $("hRows").innerHTML=sel.map(r=>{const s=r.s[tk];const c=k=>prev&&prev[k]!==s[k]?"chg":"";
+      [0,1,2].forEach(k=>{if(prev&&prev[k]!==s[k])fl[k]++;});
+      const row=`<tr><td class="l">${hm(r.t)}</td><td class="l">${hv(r.t)}</td><td class="l ${c(0)}">${ctx(s[0])}</td><td class="l ${c(1)}">${ctx(s[1])}</td><td class="l ${c(2)}">${ctx(s[2])}</td>
+        <td>${f2(s[3])}</td><td>${f2(s[4])}</td><td class="l ${c(5)}">${s[5]==null?"–":`<span class="${s[5]?"pos":"neg"}">${s[5]?"above":"below"}</span>`}</td></tr>`;
+      prev=s; return row;}).join("");
+    $("hFlips").innerHTML=`<span>Changes in this range · 4h <b>${fl[0]}</b></span><span>1h <b>${fl[1]}</b></span><span>15m <b>${fl[2]}</b></span><span class="note">${sel.length} runs</span>`;
+    $("hNote").textContent="";
+  }
+  $("hDay").addEventListener("change",()=>drawHist(false));
+  $("hTk").addEventListener("change",()=>drawHist(false));
+  $("hFrom").addEventListener("change",()=>drawHist(true));
+  $("hTo").addEventListener("change",()=>drawHist(true));
+  drawHist(false);
 })();
 </script>
 </body>

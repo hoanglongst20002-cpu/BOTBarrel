@@ -2,8 +2,10 @@
 
 A free, self-updating version of the 4h Trade Playbook screener.
 
-- **GitHub Actions** runs `screener/screener.py` on weekdays, shortly after each 4h bar closes (about 10:40 am and 1:10 pm Vancouver time).
-- It ranks the stocks in `screener/universe.txt` by 6-month gain, keeps the top 20 liquid names, and applies the playbook rules to each one: BUY, WATCH, WAIT, NO TRADE, AVOID or SKIP.
+- **GitHub Actions** runs `screener/screener.py` every 15 minutes during US market hours, 2 minutes after each 15-minute bar closes.
+- Once a day it ranks the stocks in `screener/universe.txt` by 6-month gain and keeps the top 20 liquid names. On every run it applies the playbook rules to each one: BUY, WATCH, WAIT, NO TRADE, AVOID or SKIP.
+- **4h is the strategy.** The 1h and 15m states use the same rules on faster bars and are shown as context only. The "15m vs VWAP" check is context too: in a backtest of 417 4h BUY signals it made no measurable difference.
+- **Action history:** every run is saved in `docs/data/history/<date>.json` (last 10 trading days). The dashboard's history viewer shows how each stock's 4h, 1h and 15m states changed through the day.
 - **GitHub Pages** serves the dashboard from `docs/index.html`, which the workflow regenerates on each update.
 - **ntfy** sends a phone notification on a new BUY, or a SELL for something you hold. It stays quiet otherwise.
 - If no new 4h bar has finished (weekends, holidays, duplicate runs), the job exits without changing anything.
@@ -45,7 +47,9 @@ Then open `docs/index.html`.
 
 ## Things to know
 
-- GitHub's scheduled runs can start 5–30 minutes late at busy times.
+- GitHub's scheduled runs can start 5–30 minutes late at busy times, so some 15-minute runs may be skipped or merged. The 4h decisions don't depend on run timing.
+- About 26 runs and commits per trading day. Public repos don't pay for Actions minutes. The history folder keeps only the last 10 trading days.
+- The history viewer loads files from your Pages site. It won't work if you open `docs/index.html` straight from disk.
 - GitHub disables scheduled workflows in a repo with no activity for 60 days. The workflow's own commits normally count as activity. If it stops, re-enable it under *Actions*.
 - Yahoo sometimes rate-limits cloud servers. Add the Alpaca keys if runs fail or show few names.
 - Earnings dates come from Yahoo and can be estimates.
