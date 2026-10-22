@@ -1,7 +1,7 @@
 {
- "generated": "2026-10-22T11:44:19.434227-04:00",
+ "generated": "2026-10-22T12:15:45.929393-04:00",
  "last_bar": "2026-10-21T13:30:00-04:00",
- "last_bar_15": "2026-10-22T11:15:00-04:00",
+ "last_bar_15": "2026-10-22T12:00:00-04:00",
  "provider": "Yahoo Finance",
  "universe_size": 135,
  "rules": {
@@ -27,7 +27,7 @@
    "ticker": "DELL",
    "ret_6m": 118.3,
    "ret_1m": -15.9,
-   "live": 451.3,
+   "live": 455.88,
    "earnings": "2026-11-27",
    "decision": "WATCH",
    "why": "Dipping 1.2 ATR below SMA20 in an uptrend. Buy on a 4h close above ~513.79.",
@@ -40,10 +40,10 @@
    "ctx_1h": "NO TRADE",
    "ctx_15m": "AVOID",
    "vwap": {
-    "vwap": 458.95,
-    "close15": 451.3,
+    "vwap": 458.19,
+    "close15": 455.88,
     "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -51,7 +51,7 @@
    "ticker": "CRWD",
    "ret_6m": 114.0,
    "ret_1m": -9.2,
-   "live": 238.51,
+   "live": 240.86,
    "earnings": "2026-12-01",
    "decision": "WATCH",
    "why": "Dipping 1.1 ATR below SMA20 in an uptrend. Buy on a 4h close above ~247.90.",
@@ -64,10 +64,10 @@
    "ctx_1h": "NO TRADE",
    "ctx_15m": "AVOID",
    "vwap": {
-    "vwap": 240.32,
-    "close15": 238.51,
-    "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "vwap": 240.17,
+    "close15": 240.86,
+    "above": true,
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -75,7 +75,7 @@
    "ticker": "SNOW",
    "ret_6m": 112.2,
    "ret_1m": -7.2,
-   "live": 313.71,
+   "live": 315.51,
    "earnings": "2026-12-02",
    "decision": "WATCH",
    "why": "Dipping 1.1 ATR below SMA20 in an uptrend. Buy on a 4h close above ~336.21.",
@@ -89,9 +89,9 @@
    "ctx_15m": "AVOID",
    "vwap": {
     "vwap": 314.12,
-    "close15": 313.71,
-    "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "close15": 315.51,
+    "above": true,
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -99,7 +99,7 @@
    "ticker": "PANW",
    "ret_6m": 107.3,
    "ret_1m": -8.7,
-   "live": 357.05,
+   "live": 360.75,
    "earnings": "2026-11-19",
    "decision": "WATCH",
    "why": "Dipping 2.4 ATR below SMA20 in an uptrend. Buy on a 4h close above ~374.43.",
@@ -112,10 +112,10 @@
    "ctx_1h": "AVOID",
    "ctx_15m": "AVOID",
    "vwap": {
-    "vwap": 359.51,
-    "close15": 357.05,
-    "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "vwap": 359.35,
+    "close15": 360.75,
+    "above": true,
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -123,7 +123,7 @@
    "ticker": "DDOG",
    "ret_6m": 106.1,
    "ret_1m": 4.8,
-   "live": 263.58,
+   "live": 267.08,
    "earnings": "2026-11-04",
    "decision": "WAIT",
    "why": "0.2 ATR above SMA20 with no dip yet. Wait for a pullback toward ~271.05.",
@@ -136,10 +136,10 @@
    "ctx_1h": "WATCH",
    "ctx_15m": "AVOID",
    "vwap": {
-    "vwap": 264.92,
-    "close15": 263.58,
-    "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "vwap": 264.91,
+    "close15": 267.08,
+    "above": true,
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -147,7 +147,7 @@
    "ticker": "MU",
    "ret_6m": 86.0,
    "ret_1m": -16.4,
-   "live": 873.56,
+   "live": 869.82,
    "earnings": "2026-12-23",
    "decision": "NO TRADE",
    "why": "Below SMA250 (922.21) while it still rises. Needs a close back above it and a fresh dip.",
@@ -160,10 +160,10 @@
    "ctx_1h": "AVOID",
    "ctx_15m": "AVOID",
    "vwap": {
-    "vwap": 881.89,
-    "close15": 873.56,
+    "vwap": 877.66,
+    "close15": 869.82,
     "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -171,7 +171,7 @@
    "ticker": "NOW",
    "ret_6m": 82.9,
    "ret_1m": 10.2,
-   "live": 157.25,
+   "live": 156.56,
    "earnings": "2026-10-28",
    "decision": "WAIT",
    "why": "2.2 ATR above SMA20 with no dip yet. Wait for a pullback toward ~143.63.",
@@ -184,10 +184,10 @@
    "ctx_1h": "WAIT",
    "ctx_15m": "WAIT",
    "vwap": {
-    "vwap": 155.97,
-    "close15": 157.25,
+    "vwap": 156.08,
+    "close15": 156.56,
     "above": true,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -195,7 +195,7 @@
    "ticker": "ZS",
    "ret_6m": 76.0,
    "ret_1m": 9.2,
-   "live": 238.85,
+   "live": 240.47,
    "earnings": "2026-11-24",
    "decision": "WAIT",
    "why": "1.3 ATR above SMA20 with no dip yet. Wait for a pullback toward ~221.17.",
@@ -208,10 +208,10 @@
    "ctx_1h": "WAIT",
    "ctx_15m": "WAIT",
    "vwap": {
-    "vwap": 235.75,
-    "close15": 238.85,
+    "vwap": 236.66,
+    "close15": 240.47,
     "above": true,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -219,7 +219,7 @@
    "ticker": "AMD",
    "ret_6m": 70.1,
    "ret_1m": -15.5,
-   "live": 511.1,
+   "live": 515.68,
    "earnings": "2026-11-03",
    "decision": "WATCH",
    "why": "Dipping 0.9 ATR below SMA20 in an uptrend. Buy on a 4h close above ~571.03.",
@@ -232,10 +232,10 @@
    "ctx_1h": "NO TRADE",
    "ctx_15m": "AVOID",
    "vwap": {
-    "vwap": 519.46,
-    "close15": 511.1,
+    "vwap": 518.29,
+    "close15": 515.68,
     "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -243,7 +243,7 @@
    "ticker": "NET",
    "ret_6m": 52.2,
    "ret_1m": -11.4,
-   "live": 308.02,
+   "live": 312.07,
    "earnings": "2026-11-05",
    "decision": "WATCH",
    "why": "Dipping 1.4 ATR below SMA20 in an uptrend. Buy on a 4h close above ~323.91.",
@@ -256,10 +256,10 @@
    "ctx_1h": "NO TRADE",
    "ctx_15m": "AVOID",
    "vwap": {
-    "vwap": 310.81,
-    "close15": 308.02,
-    "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "vwap": 310.78,
+    "close15": 312.07,
+    "above": true,
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -267,7 +267,7 @@
    "ticker": "TMO",
    "ret_6m": 46.6,
    "ret_1m": 2.7,
-   "live": 686.31,
+   "live": 683.51,
    "earnings": null,
    "decision": "WAIT",
    "why": "1.4 ATR above SMA20 with no dip yet. Wait for a pullback toward ~675.00.",
@@ -280,10 +280,10 @@
    "ctx_1h": "WATCH",
    "ctx_15m": "WATCH",
    "vwap": {
-    "vwap": 686.89,
-    "close15": 686.31,
+    "vwap": 686.01,
+    "close15": 683.51,
     "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -291,7 +291,7 @@
    "ticker": "ABBV",
    "ret_6m": 43.5,
    "ret_1m": 8.0,
-   "live": 284.1,
+   "live": 283.6,
    "earnings": "2026-10-30",
    "decision": "WAIT",
    "why": "0.7 ATR above SMA20 with no dip yet. Wait for a pullback toward ~281.51.",
@@ -302,12 +302,12 @@
    "atr": 4.9,
    "bar": "2026-10-21T13:30:00-04:00",
    "ctx_1h": "WATCH",
-   "ctx_15m": "WAIT",
+   "ctx_15m": "WATCH",
    "vwap": {
-    "vwap": 283.2,
-    "close15": 284.1,
+    "vwap": 283.27,
+    "close15": 283.6,
     "above": true,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -315,7 +315,7 @@
    "ticker": "LLY",
    "ret_6m": 42.8,
    "ret_1m": 13.5,
-   "live": 1319.0,
+   "live": 1313.27,
    "earnings": "2026-10-29",
    "decision": "WAIT",
    "why": "1.9 ATR above SMA20 with no dip yet. Wait for a pullback toward ~1222.13.",
@@ -328,10 +328,10 @@
    "ctx_1h": "WAIT",
    "ctx_15m": "WAIT",
    "vwap": {
-    "vwap": 1308.15,
-    "close15": 1319.0,
+    "vwap": 1308.4,
+    "close15": 1313.27,
     "above": true,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -339,7 +339,7 @@
    "ticker": "CRM",
    "ret_6m": 42.2,
    "ret_1m": 3.3,
-   "live": 247.98,
+   "live": 249.39,
    "earnings": "2026-12-02",
    "decision": "WAIT",
    "why": "0.7 ATR above SMA20 with no dip yet. Wait for a pullback toward ~237.49.",
@@ -352,10 +352,10 @@
    "ctx_1h": "NO TRADE",
    "ctx_15m": "WAIT",
    "vwap": {
-    "vwap": 246.34,
-    "close15": 247.98,
+    "vwap": 246.92,
+    "close15": 249.39,
     "above": true,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -363,7 +363,7 @@
    "ticker": "PLTR",
    "ret_6m": 41.5,
    "ret_1m": 4.5,
-   "live": 197.9,
+   "live": 199.0,
    "earnings": "2026-11-02",
    "decision": "WAIT",
    "why": "0.3 ATR above SMA20 with no dip yet. Wait for a pullback toward ~199.77.",
@@ -376,10 +376,10 @@
    "ctx_1h": "WAIT",
    "ctx_15m": "NO TRADE",
    "vwap": {
-    "vwap": 200.22,
-    "close15": 197.9,
+    "vwap": 199.94,
+    "close15": 199.0,
     "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -387,7 +387,7 @@
    "ticker": "MRVL",
    "ret_6m": 40.0,
    "ret_1m": -11.2,
-   "live": 224.18,
+   "live": 226.85,
    "earnings": "2026-12-01",
    "decision": "WATCH",
    "why": "Dipping 0.7 ATR below SMA20 in an uptrend. Buy on a 4h close above ~252.04.",
@@ -400,10 +400,10 @@
    "ctx_1h": "NO TRADE",
    "ctx_15m": "AVOID",
    "vwap": {
-    "vwap": 227.75,
-    "close15": 224.18,
+    "vwap": 227.4,
+    "close15": 226.85,
     "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -411,7 +411,7 @@
    "ticker": "ACN",
    "ret_6m": 39.8,
    "ret_1m": 34.2,
-   "live": 248.79,
+   "live": 250.15,
    "earnings": "2026-12-17",
    "decision": "WAIT",
    "why": "3.2 ATR above SMA20 with no dip yet. Wait for a pullback toward ~222.40.",
@@ -424,10 +424,10 @@
    "ctx_1h": "WAIT",
    "ctx_15m": "WAIT",
    "vwap": {
-    "vwap": 245.02,
-    "close15": 248.79,
+    "vwap": 246.34,
+    "close15": 250.15,
     "above": true,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -435,7 +435,7 @@
    "ticker": "SHOP",
    "ret_6m": 38.8,
    "ret_1m": 21.1,
-   "live": 170.77,
+   "live": 170.59,
    "earnings": "2026-11-03",
    "decision": "WAIT",
    "why": "0.3 ATR above SMA20 with no dip yet. Wait for a pullback toward ~172.71.",
@@ -448,10 +448,10 @@
    "ctx_1h": "WATCH",
    "ctx_15m": "NO TRADE",
    "vwap": {
-    "vwap": 171.22,
-    "close15": 170.77,
+    "vwap": 171.09,
+    "close15": 170.59,
     "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -459,7 +459,7 @@
    "ticker": "MET",
    "ret_6m": 36.2,
    "ret_1m": 5.1,
-   "live": 101.64,
+   "live": 102.12,
    "earnings": "2026-11-04",
    "decision": "WAIT",
    "why": "1.6 ATR above SMA20 with no dip yet. Wait for a pullback toward ~100.08.",
@@ -470,12 +470,12 @@
    "atr": 1.28,
    "bar": "2026-10-21T13:30:00-04:00",
    "ctx_1h": "WAIT",
-   "ctx_15m": "WATCH",
+   "ctx_15m": "BUY",
    "vwap": {
-    "vwap": 101.7,
-    "close15": 101.64,
-    "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "vwap": 101.76,
+    "close15": 102.12,
+    "above": true,
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   },
   {
@@ -483,7 +483,7 @@
    "ticker": "MRK",
    "ret_6m": 35.3,
    "ret_1m": 3.4,
-   "live": 152.56,
+   "live": 152.12,
    "earnings": "2026-10-29",
    "decision": "WAIT",
    "why": "1.5 ATR above SMA20 with no dip yet. Wait for a pullback toward ~145.76.",
@@ -496,10 +496,10 @@
    "ctx_1h": "NO TRADE",
    "ctx_15m": "WAIT",
    "vwap": {
-    "vwap": 152.6,
-    "close15": 152.56,
+    "vwap": 152.49,
+    "close15": 152.12,
     "above": false,
-    "bar15": "2026-10-22T11:15:00-04:00"
+    "bar15": "2026-10-22T12:00:00-04:00"
    }
   }
  ]
