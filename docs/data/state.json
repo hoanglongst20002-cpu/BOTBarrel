@@ -1,6 +1,6 @@
 {
- "last_bar": "2026-11-02T13:30:00-05:00",
- "last_bar_15": "2026-11-03T12:45:00-05:00",
+ "last_bar": "2026-11-03T09:30:00-05:00",
+ "last_bar_15": "2026-11-03T13:45:00-05:00",
  "decisions": {
   "CRWD": "WATCH",
   "SNOW": "WATCH",
@@ -8,7 +8,7 @@
   "DELL": "NO TRADE",
   "ZS": "WATCH",
   "DDOG": "NO TRADE",
-  "TMO": "WATCH",
+  "TMO": "BUY",
   "LLY": "WAIT",
   "AMGN": "WAIT",
   "ACN": "WAIT",
@@ -16,11 +16,11 @@
   "SPOT": "WAIT",
   "AMD": "NO TRADE",
   "MU": "NO TRADE",
-  "DHR": "WATCH",
+  "DHR": "BUY",
   "SHOP": "SKIP",
   "V": "WAIT",
   "MA": "WAIT",
-  "MRK": "WAIT",
+  "MRK": "WATCH",
   "GILD": "WAIT"
  },
  "rank_date": "2026-11-03",
