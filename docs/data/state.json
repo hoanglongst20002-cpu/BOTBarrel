@@ -1,6 +1,6 @@
 {
- "last_bar": "2026-11-03T13:30:00-05:00",
- "last_bar_15": "2026-11-04T12:15:00-05:00",
+ "last_bar": "2026-11-04T09:30:00-05:00",
+ "last_bar_15": "2026-11-04T13:15:00-05:00",
  "decisions": {
   "CRWD": "WATCH",
   "SNOW": "WATCH",
@@ -12,16 +12,16 @@
   "SPOT": "WAIT",
   "AMGN": "WAIT",
   "LLY": "WAIT",
-  "ABBV": "WATCH",
+  "ABBV": "BUY",
   "SHOP": "WATCH",
   "DDOG": "NO TRADE",
   "MDT": "WAIT",
   "MA": "WAIT",
   "V": "WAIT",
-  "DHR": "WATCH",
+  "DHR": "BUY",
   "ABT": "WAIT",
-  "MSFT": "WATCH",
-  "MRK": "WATCH"
+  "MSFT": "BUY",
+  "MRK": "BUY"
  },
  "rank_date": "2026-11-04",
  "rank": [
