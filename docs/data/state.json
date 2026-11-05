@@ -1,12 +1,12 @@
 {
- "last_bar": "2026-11-05T09:30:00-05:00",
- "last_bar_15": "2026-11-05T15:15:00-05:00",
+ "last_bar": "2026-11-05T13:30:00-05:00",
+ "last_bar_15": "2026-11-05T15:45:00-05:00",
  "decisions": {
   "SNOW": "NO TRADE",
   "CRWD": "WATCH",
   "PANW": "NO TRADE",
   "ACN": "WAIT",
-  "ABBV": "WAIT",
+  "ABBV": "WATCH",
   "LLY": "WAIT",
   "AMGN": "WAIT",
   "TMO": "WATCH",
@@ -19,7 +19,7 @@
   "ABT": "WAIT",
   "MMM": "WAIT",
   "MA": "WAIT",
-  "MET": "WAIT",
+  "MET": "WATCH",
   "DHR": "WATCH",
   "GILD": "WAIT"
  },
