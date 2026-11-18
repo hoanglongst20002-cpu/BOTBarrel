@@ -1,13 +1,13 @@
 {
- "last_bar": "2026-11-17T13:30:00-05:00",
- "last_bar_15": "2026-11-18T12:45:00-05:00",
+ "last_bar": "2026-11-18T09:30:00-05:00",
+ "last_bar_15": "2026-11-18T13:45:00-05:00",
  "decisions": {
   "SNOW": "NO TRADE",
   "TMO": "WATCH",
-  "NET": "NO TRADE",
+  "NET": "BUY",
   "TGT": "SKIP",
-  "CRWD": "WATCH",
-  "SPOT": "WATCH",
+  "CRWD": "BUY",
+  "SPOT": "BUY",
   "ABBV": "WATCH",
   "LLY": "WATCH",
   "AMGN": "WATCH",
@@ -19,7 +19,7 @@
   "ACN": "WATCH",
   "PANW": "NO TRADE",
   "MDT": "WATCH",
-  "GILD": "WAIT",
+  "GILD": "WATCH",
   "PYPL": "WATCH",
   "MA": "WATCH"
  },
