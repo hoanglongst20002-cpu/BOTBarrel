@@ -1,13 +1,13 @@
 {
- "last_bar": "2026-11-20T09:30:00-05:00",
- "last_bar_15": "2026-11-20T15:30:00-05:00",
+ "last_bar": "2026-11-20T13:30:00-05:00",
+ "last_bar_15": "2026-11-20T15:45:00-05:00",
  "decisions": {
   "TMO": "WATCH",
   "SNOW": "NO TRADE",
   "CRWD": "WAIT",
   "TGT": "WAIT",
   "ABBV": "WATCH",
-  "PANW": "WAIT",
+  "PANW": "NO TRADE",
   "AMGN": "WATCH",
   "MDT": "SKIP",
   "DHR": "WATCH",
